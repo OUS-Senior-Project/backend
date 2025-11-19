@@ -1,22 +1,39 @@
-# ------------------------------------------------------------
+# CODEOWNERS for OUS Senior Project – Backend Repository
 
-## CODEOWNERS for OUS Senior Project - Backend Repository
-
-------------------------------------------------------------
-
-### Backend code (Python files anywhere in the repo)
+## === Backend code (owned by the backend team) ===
 
 *.py                    @OUS-Senior-Project/backend-a-b-e
+*.json                  @OUS-Senior-Project/backend-a-b-e
+*.ini                   @OUS-Senior-Project/backend-a-b-e
+*.cfg                   @OUS-Senior-Project/backend-a-b-e
 
-### CI/CD and GitHub workflows
+app/**                  @OUS-Senior-Project/backend-a-b-e
+src/**                  @OUS-Senior-Project/backend-a-b-e
+
+## === Documentation ===
+
+docs/**                 @OUS-Senior-Project/Documentation  
+README.md               @OUS-Senior-Project/Documentation
+
+## === CI/CD and GitHub workflows ===
 
 .github/**              @OUS-Senior-Project/Devops
 
-### Documentation
+## === Root-level project files ===
 
-docs/**                 @OUS-Senior-Project/Documentation
-README.md               @OUS-Senior-Project/Documentation
+requirements.txt        @OUS-Senior-Project/Maintainers  
+requirements-dev.txt    @OUS-Senior-Project/Maintainers  
+pyproject.toml          @OUS-Senior-Project/Maintainers  
+Pipfile                 @OUS-Senior-Project/Maintainers  
+Pipfile.lock            @OUS-Senior-Project/Maintainers  
 
-### Fallback owners for any unmatched files
+.env                    @OUS-Senior-Project/Maintainers  
+*.env*                  @OUS-Senior-Project/Maintainers  
 
-*                       @OUS-Senior-Project/Maintainers
+Dockerfile              @OUS-Senior-Project/Maintainers  
+.dockerignore           @OUS-Senior-Project/Maintainers  
+
+.editorconfig           @OUS-Senior-Project/Maintainers  
+.pre-commit-config.yaml @OUS-Senior-Project/Maintainers  
+*.yaml                  @OUS-Senior-Project/Maintainers  
+*.yml                   @OUS-Senior-Project/Maintainers
