@@ -4,9 +4,9 @@
 
 ------------------------------------------------------------
 
-### Backend code (entire repository is backend)
+### Backend code (Python files anywhere in the repo)
 
-*                       @OUS-Senior-Project/Backend
+*.py                    @OUS-Senior-Project/backend-a-b-e
 
 ### CI/CD and GitHub workflows
 
