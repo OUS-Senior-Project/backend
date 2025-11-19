@@ -4,10 +4,6 @@
 
 ------------------------------------------------------------
 
-### Fallback owners for any unmatched files
-
-*                       @OUS-Senior-Project/Maintainers
-
 ### Backend code (entire repository is backend)
 
 /                       @OUS-Senior-Project/Backend
@@ -20,3 +16,7 @@
 
 docs/**                 @OUS-Senior-Project/Documentation
 README.md               @OUS-Senior-Project/Documentation
+
+### Fallback owners for any unmatched files
+
+*                       @OUS-Senior-Project/Maintainers
