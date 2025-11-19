@@ -4,19 +4,19 @@
 
 ------------------------------------------------------------
 
-### Backend code (entire repository is backend)
+### Backend code (Python files anywhere in the repo)
 
-*                       @OUS-Senior-Project/Backend
+*.py                    @OUS-Senior-Project/backend
 
 ### CI/CD and GitHub workflows
 
-.github/**              @OUS-Senior-Project/Devops
+.github/**              @OUS-Senior-Project/devops
 
 ### Documentation
 
-docs/**                 @OUS-Senior-Project/Documentation
-README.md               @OUS-Senior-Project/Documentation
+docs/**                 @OUS-Senior-Project/documentation
+README.md               @OUS-Senior-Project/documentation
 
 ### Fallback owners for any unmatched files
 
-*                       @OUS-Senior-Project/Maintainers
+*                       @OUS-Senior-Project/maintainers
