@@ -1,1 +1,5 @@
-from app.db.models.item import Item
+from sqlalchemy.orm import DeclarativeBase
+
+
+class Base(DeclarativeBase):
+    pass
