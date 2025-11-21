@@ -27,10 +27,30 @@ if [ -f "requirements.txt" ]; then
 else
     echo "📥 requirements.txt not found. Installing minimal dependencies..."
     pip install --upgrade pip
-    pip install fastapi "uvicorn[standard]" python-dotenv pydantic-settings
+    pip install fastapi "uvicorn[standard]" python-dotenv pydantic-settings ruff mypy
     pip freeze > requirements.txt
 fi
 
-# 5. Run the FastAPI server
+# 5. Run Ruff linting (optional but recommended)
+if command -v ruff >/dev/null 2>&1; then
+    echo "🔎 Running Ruff linting..."
+    ruff check . --fix
+else
+    echo "⚠️ Ruff not installed. Skipping lint step."
+fi
+
+# 6. Run Ruff formatter
+if command -v ruff >/dev/null 2>&1; then
+    echo "🎨 Formatting code with Ruff..."
+    ruff format .
+fi
+
+# 7. Run Mypy type checking (optional)
+if command -v mypy >/dev/null 2>&1; then
+    echo "🧠 Running Mypy type checking..."
+    mypy app/ || echo "⚠️ Mypy found type issues (does not stop server)."
+fi
+
+# 8. Run the FastAPI server
 echo "🚀 Starting FastAPI server on http://127.0.0.1:8000 ..."
 uvicorn app.main:app --reload

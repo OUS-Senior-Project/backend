@@ -1,29 +1,34 @@
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
-from app.db.deps import get_db
-from app.db.models.item import Item as ItemModel
-from app.schemas.item import Item, ItemCreate
+from fastapi import APIRouter, HTTPException
+
+from app.models.item import Item
 
 router = APIRouter()
 
+# In-memory "database"
+items_db = []
+
+
 @router.get("/items", response_model=list[Item])
-def get_items(db: Session = Depends(get_db)):
-    return db.query(ItemModel).all()
+def get_items():
+    return items_db
+
 
 @router.post("/items", response_model=Item)
-def create_item(item: ItemCreate, db: Session = Depends(get_db)):
-    db_item = ItemModel(**item.model_dump())
-    db.add(db_item)
-    db.commit()
-    db.refresh(db_item)
-    return db_item
+def create_item(item: Item):
+    # Prevent duplicate IDs
+    for existing in items_db:
+        if existing.id == item.id:
+            raise HTTPException(status_code=400, detail="Item ID already exists")
+
+    items_db.append(item)
+    return item
+
 
 @router.delete("/items/{item_id}")
-def delete_item(item_id: int, db: Session = Depends(get_db)):
-    db_item = db.query(ItemModel).filter(ItemModel.id == item_id).first()
-    if not db_item:
-        raise HTTPException(status_code=404, detail="Item not found")
+def delete_item(item_id: int):
+    for item in items_db:
+        if item.id == item_id:
+            items_db.remove(item)
+            return {"message": "Item deleted"}
 
-    db.delete(db_item)
-    db.commit()
-    return {"message": "Item deleted"}
+    raise HTTPException(status_code=404, detail="Item not found")
