@@ -5,10 +5,10 @@ from app.core.config import settings
 
 
 def create_app() -> FastAPI:
-    app = FastAPI(title=settings.PROJECT_NAME)
+    app = FastAPI(title=settings.project_name)
 
     # Include routes
-    app.include_router(api_router, prefix=settings.API_V1_PREFIX)
+    app.include_router(api_router, prefix=settings.api_v1_prefix)
 
     return app
 

@@ -1,12 +1,16 @@
 from pydantic_settings import BaseSettings
+from pydantic import Field
 
 
 class Settings(BaseSettings):
-    PROJECT_NAME: str = "Simple FastAPI Server"
-    API_V1_PREFIX: str = "/api/v1"
+    project_name: str = Field(default="Backend", env="PROJECT_NAME")
+    api_v1_prefix: str = Field(default="/api/v1", env="API_V1_PREFIX")
+    database_url: str = Field(default="sqlite:///./local.db", env="DATABASE_URL")
 
-    class Config:
-        env_file = ".env"
+    model_config = {
+        "env_file": ".env",
+        "extra": "ignore",
+    }
 
 
 settings = Settings()
