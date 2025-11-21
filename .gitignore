@@ -1,1 +1,15 @@
+# Ignore environment variables file
 .env
+
+# macOS
+.DS_Store
+
+# Python caches
+__pycache__/
+*.py[cod]
+
+# SQLite local DB (if you want to ignore it)
+local.db
+
+# VSCode settings
+.vscode/
