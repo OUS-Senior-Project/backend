@@ -1,10 +1,12 @@
 from fastapi import APIRouter, HTTPException
+
 from app.models.item import Item
 
 router = APIRouter()
 
 # In-memory "database"
 items_db = []
+
 
 @router.get("/items", response_model=list[Item])
 def get_items():

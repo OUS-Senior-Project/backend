@@ -1,0 +1,28 @@
+[tool.ruff]
+line-length = 88
+preview = true
+exclude = [
+    ".git",
+    ".venv",
+    "venv",
+    "__pycache__",
+    "migrations",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "W"]
+ignore = []
+
+# Auto-fix issues when run with --fix
+fixable = ["ALL"]
+unfixable = []
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+skip-magic-trailing-comma = false
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+force-single-line = false
