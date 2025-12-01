@@ -5,17 +5,6 @@ import pandas as pd
 import streamlit as st
 from openpyxl.utils import get_column_letter
 
-# Required columns to keep
-REQUIRED_COLS = [
-    "Academic Level",
-    "Primary Program of Study",
-    "Current Primary College / School",
-    "Cumulative GPA",
-    "Gender",
-    "FTIC Cohort",
-    "Cumulative Credits: Earned",
-]
-
 
 def extract_filters(file_path):
     """Extract Excel AutoFilters from the file"""
@@ -76,40 +65,30 @@ if uploaded:
         # Clean column names - strip whitespace
         df.columns = df.columns.str.strip()
 
-        # Check for required columns
-        missing = [col for col in REQUIRED_COLS if col not in df.columns]
+        # Remove completely empty rows (all columns are null)
+        df = df.dropna(how="all")
 
-        if missing:
-            st.error(f"Missing columns: {', '.join(missing)}")
-            st.write(f"Available columns: {list(df.columns)}")
-        else:
-            # Keep only required columns
-            df = df[REQUIRED_COLS]
+        # Reset index to start from 1
+        df = df.reset_index(drop=True)
+        df.index = df.index + 1
+        df.index.name = "Student #"
 
-            # Remove completely empty rows (all columns are null)
-            df = df.dropna(how="all")
+        st.subheader("Cleaned Data")
+        st.dataframe(df)
 
-            # Reset index to start from 1
-            df = df.reset_index(drop=True)
-            df.index = df.index + 1
-            df.index.name = "Student #"
+        st.success(f"Total students: **{len(df)}**")
 
-            st.subheader("Cleaned Data")
-            st.dataframe(df)
+        # Download button
+        xlsx_path = "cleaned_output.xlsx"
+        df.to_excel(xlsx_path, index=True)
 
-            st.success(f"Total students: **{len(df)}**")
-
-            # Download button
-            xlsx_path = "cleaned_output.xlsx"
-            df.to_excel(xlsx_path, index=True)
-
-            with open(xlsx_path, "rb") as f:
-                st.download_button(
-                    label="Download Cleaned XLSX",
-                    data=f,
-                    file_name="cleaned_output.xlsx",
-                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                )
+        with open(xlsx_path, "rb") as f:
+            st.download_button(
+                label="Download Cleaned XLSX",
+                data=f,
+                file_name="cleaned_output.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            )
 
     except Exception as e:
         st.error(f"❌ Error: {str(e)}")
